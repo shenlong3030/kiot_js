@@ -1,3 +1,13 @@
+$(window).on('load', function() {
+	setTimeout(function(){
+		$(".input-group-append .dropdown-content").addClass("shenForm");
+		$("section.mainRight.ng-scope").addClass("shenContainer");
+
+		$(".shenForm").prependTo(".shenContainer");
+		$(".shenForm").css("display", "contents");
+	}, 1000);
+});
+
 function copyToClipboard(text) {
     var $temp = $("<input>");
     $("body").append($temp);
