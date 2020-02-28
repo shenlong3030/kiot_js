@@ -1,3 +1,9 @@
-.k-gridNone.k-scroll .k-grid>.k-grid-content {
-    max-height: 3390px;
+.k-grid-content {
+    max-height: none !important;
+    height: fit-content;
+}
+
+.mainWrap {
+    height: 100% !important;
+    position: relative !important;
 }
