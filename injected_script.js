@@ -1,10 +1,10 @@
 $(window).on('load', function() {
 	setTimeout(function(){
 		$(".input-group-append .dropdown-content").addClass("shenForm");
-		$("section.mainRight.ng-scope").addClass("shenContainer");
 
-		$(".shenForm").prependTo(".shenContainer");
+		$(".shenForm").insertAfter(".header-filter");
 		$(".shenForm").css("display", "contents");
+		$(".shenForm button").css("display", "none");
 	}, 1000);
 });
 
