@@ -22,9 +22,10 @@ $('html').on('click', '.tdCode', function(){
     console.log("copied the value: " + $(this).text());
 })
 
-// copy MaSP khi click SP tim duoc khi BanHang
-$('html').on('click', '.search-product-info', function(){
-    var e = $(this).find('.codeValue');
-    copyToClipboard(e.text());
-    console.log("copied the value: " + e.text());
+// copy MaSP khi click SP
+$('body').on('click', 'tr.k-master-row', function(){
+	$(this).find(".cell-code.tdCodeDoctor").each(function(){
+	    copyToClipBoard($(this).text());
+	    console.log("copied the value: " + $(this).text());
+	});
 })
