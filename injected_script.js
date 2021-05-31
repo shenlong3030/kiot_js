@@ -1,4 +1,4 @@
-$(window).on('load', function() {
+window.onload = (event) => {
 	setTimeout(function(){
 		$(".input-group-append .dropdown-content").addClass("shenForm");
 
@@ -44,7 +44,7 @@ $(window).on('load', function() {
             console.log("copied the value: " + $(this).text());
         });
     })
-});
+};
 
 window.addEventListener('hashchange', function(e) {
     setTimeout(function(){
