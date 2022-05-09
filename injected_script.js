@@ -1,12 +1,5 @@
-window.onload = (event) => {
-	setTimeout(function(){
-		$(".input-group-append .dropdown-content").addClass("shenForm");
 
-		$(".shenForm").insertAfter(".header-filter");
-		$(".shenForm").css("display", "contents");
-		$(".shenForm button").css("display", "none");
-	}, 3000);
-    
+$(document).ready(function() {
     function copyToClipBoard(text) {
         var $temp = $("<textarea>");
         $("body").append($temp);
@@ -14,45 +7,75 @@ window.onload = (event) => {
         document.execCommand("copy");
         $temp.remove();
     }
-    
-    var $btn2 = $('<input id="btn_copy_name" type="button" value="Copy tên" />');
-    $btn2.prependTo($("body"));
-    $('#btn_copy_name').click(function (e) {
-          var text = "";
-          $("table").find("td.cell-auto.ng-binding").each(function(){
-              text = text + $(this).text() + "\n";
-          });
-          console.log("copy text : " + text );
-          copyToClipBoard(text);
-    });
-    
-    var $btn1 = $('<input id="btn_copy_id" type="button" value="Copy mã" />');
-    $btn1.prependTo($("body"));
-    $('#btn_copy_id').click(function (e) {
-          var text = "";
-          $("table").find("td.cell-code.tdCodeDoctor").each(function(){
-              text = text + $(this).text() + "\n";
-          });
-          console.log("copy text : " + text );
-          copyToClipBoard(text);
-    });
-    
-     // copy MaSP khi click SP
-    $('body').on('click', 'tr.k-master-row', function(){
-        $(this).find(".cell-code.tdCodeDoctor").each(function(){
-            copyToClipBoard($(this).text());
-            console.log("copied the value: " + $(this).text());
+
+    setTimeout(function() {
+        // show input tìm kiếm hàng hóa
+        $(".input-group-append .dropdown-content").addClass("shenForm");
+        $(".shenForm").insertAfter(".header-filter");
+        $(".shenForm").css("display", "contents");
+        $(".shenForm button").css("display", "none");
+
+        // tạo toolbar
+        var container = $('<div id="floating_bar"></div>');
+        container.css("position","fixed");
+        container.css("padding", "14px");
+        container.css("text-align", "center");
+        container.css("text-align", "center");
+        container.css("display", "block");
+        container.css("z-index", "1000");
+        container.prependTo($("body"));
+
+        var btn = $('<input id="btn_copy_name" type="button" value="Copy tên" />');
+        btn.appendTo(container);
+        btn.click(function(e) {
+            var text = "";
+            $("table").find("td.cell-auto.ng-binding").each(function() {
+                text = text + $(this).text() + "\n";
+            });
+            console.log("copy text : " + text);
+            copyToClipBoard(text);
         });
-    })
-};
 
-window.addEventListener('hashchange', function(e) {
-    setTimeout(function(){
-		$(".input-group-append .dropdown-content").addClass("shenForm");
+        btn = $('<input id="btn_copy_id" type="button" value="Copy mã" />');
+        btn.appendTo(container);
+        btn.click(function(e) {
+            var text = "";
+            $("table").find("td.cell-code.tdCodeDoctor").each(function() {
+                text = text + $(this).text() + "\n";
+            });
+            console.log("copy text : " + text);
+            copyToClipBoard(text);
+        });
 
-		$(".shenForm").insertAfter(".header-filter");
-		$(".shenForm").css("display", "contents");
-		$(".shenForm button").css("display", "none");
-	}, 3000);
+        btn = $('<input id="btn_copy_name_id" type="button" value="Copy SP tạo QRcode" />');
+        btn.appendTo(container);
+        btn.click(function(e) {
+            var text = "";
+            $("table").find("td.cell-code").each(function() {
+                var masp = $(this).text();
+                var tensp = $(this).next().text();
+                text = text + tensp + " " + masp + "\n";
+            });
+            console.log("copy text : " + text);
+            copyToClipBoard(text);
+        });
+
+        // copy MaSP khi click SP
+        $('body').on('click', 'tr.k-master-row', function() {
+            $(this).find(".cell-code.tdCodeDoctor").each(function() {
+                copyToClipBoard($(this).text());
+                console.log("copied the value: " + $(this).text());
+            });
+        })
+    }, 3000);
 });
 
+window.addEventListener('hashchange', function(e) {
+    setTimeout(function() {
+        $(".input-group-append .dropdown-content").addClass("shenForm");
+
+        $(".shenForm").insertAfter(".header-filter");
+        $(".shenForm").css("display", "contents");
+        $(".shenForm button").css("display", "none");
+    }, 3000);
+});
