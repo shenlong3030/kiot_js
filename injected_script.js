@@ -8,12 +8,22 @@ $(document).ready(function() {
         $temp.remove();
     }
 
-    setTimeout(function() {
-        // show input tìm kiếm hàng hóa
+    function injectForm() {
+    	// show input tìm kiếm hàng hóa
         $(".input-group-append .dropdown-content").addClass("shenForm");
         $(".shenForm").insertAfter(".header-filter");
         $(".shenForm").css("display", "contents");
         $(".shenForm button").css("display", "none");
+
+        // disable tab focus
+        $(".header-filter a").attr('tabindex', -1);
+        $(".header-filter button").attr('tabindex', -1);
+        $(".header-filter #columnSelection").attr('tabindex', -1);
+    }
+
+    setTimeout(function() {
+        // show input tìm kiếm hàng hóa
+        injectForm();
 
         // tạo toolbar
         var container = $('<div id="floating_bar"></div>');
@@ -22,7 +32,7 @@ $(document).ready(function() {
         container.css("text-align", "center");
         container.css("text-align", "center");
         container.css("display", "block");
-        container.css("z-index", "1000");
+        container.css("z-index", "10005");
         container.prependTo($("body"));
 
         var btn = $('<input id="btn_copy_name" type="button" value="Copy tên" />');
@@ -51,7 +61,7 @@ $(document).ready(function() {
         btn.appendTo(container);
         btn.click(function(e) {
             var text = "";
-            $("table").find("td.cell-code").each(function() {
+            $(".ng-isolate-scope.k-window-content.k-content").find("td.cell-code").each(function() {
                 var masp = $(this).text();
                 var tensp = $(this).next().text();
                 text = text + tensp + " " + masp + "\n";
@@ -72,10 +82,6 @@ $(document).ready(function() {
 
 window.addEventListener('hashchange', function(e) {
     setTimeout(function() {
-        $(".input-group-append .dropdown-content").addClass("shenForm");
-
-        $(".shenForm").insertAfter(".header-filter");
-        $(".shenForm").css("display", "contents");
-        $(".shenForm button").css("display", "none");
+        injectForm();
     }, 3000);
 });
