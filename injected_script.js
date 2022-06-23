@@ -19,6 +19,18 @@ $(document).ready(function() {
         $(".header-filter a").attr('tabindex', -1);
         $(".header-filter button").attr('tabindex', -1);
         $(".header-filter #columnSelection").attr('tabindex', -1);
+
+        // click button to dynamic create original input
+        $("#idDropdownBtnSearch").click();
+        setTimeout(function(){
+            // customize original input
+            $("#filterMultiSelect").attr('id', "shenInput");
+
+            // onfocus , select input text
+            $("#shenInput input").focus(function() {
+                this.select();
+            });
+        },200);
     }
 
     setTimeout(function() {
@@ -32,7 +44,7 @@ $(document).ready(function() {
         container.css("text-align", "center");
         container.css("text-align", "center");
         container.css("display", "block");
-        container.css("z-index", "10005");
+        container.css("z-index", "1000");
         container.prependTo($("body"));
 
         var btn = $('<input id="btn_copy_name" type="button" value="Copy tên" />');
@@ -61,7 +73,7 @@ $(document).ready(function() {
         btn.appendTo(container);
         btn.click(function(e) {
             var text = "";
-            $(".ng-isolate-scope.k-window-content.k-content").find("td.cell-code").each(function() {
+            $("table").find("td.cell-code").each(function() {
                 var masp = $(this).text();
                 var tensp = $(this).next().text();
                 text = text + tensp + " " + masp + "\n";
