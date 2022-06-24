@@ -1,38 +1,27 @@
+function copyToClipBoard(text) {
+    var $temp = $("<textarea>");
+    $("body").append($temp);
+    $temp.val(text).select();
+    document.execCommand("copy");
+    $temp.remove();
+}
+
+function injectForm() {
+	$(".input-group-append .dropdown-content").addClass("shenForm");
+    $(".shenForm").insertAfter(".header-filter");
+    $(".shenForm").css("display", "contents");
+    $(".shenForm button").css("display", "none");
+
+    // show input masp
+    $(".shenForm div:first-child").removeClass("ng-hide");
+
+    // disable tab focus
+    $(".header-filter a").attr('tabindex', -1);
+    $(".header-filter button").attr('tabindex', -1);
+    $(".header-filter #columnSelection").attr('tabindex', -1);
+}
 
 $(document).ready(function() {
-    function copyToClipBoard(text) {
-        var $temp = $("<textarea>");
-        $("body").append($temp);
-        $temp.val(text).select();
-        document.execCommand("copy");
-        $temp.remove();
-    }
-
-    function injectForm() {
-    	// show input tìm kiếm hàng hóa
-        $(".input-group-append .dropdown-content").addClass("shenForm");
-        $(".shenForm").insertAfter(".header-filter");
-        $(".shenForm").css("display", "contents");
-        $(".shenForm button").css("display", "none");
-
-        // disable tab focus
-        $(".header-filter a").attr('tabindex', -1);
-        $(".header-filter button").attr('tabindex', -1);
-        $(".header-filter #columnSelection").attr('tabindex', -1);
-
-        // click button to dynamic create original input
-        $("#idDropdownBtnSearch").click();
-        setTimeout(function(){
-            // customize original input
-            $("#filterMultiSelect").attr('id', "shenInput");
-
-            // onfocus , select input text
-            $("#shenInput input").focus(function() {
-                this.select();
-            });
-        },200);
-    }
-
     setTimeout(function() {
         // show input tìm kiếm hàng hóa
         injectForm();
