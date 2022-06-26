@@ -7,7 +7,7 @@ function copyToClipBoard(text) {
 }
 
 function injectForm() {
-	$(".input-group-append .dropdown-content").addClass("shenForm");
+    $(".input-group-append .dropdown-content").addClass("shenForm");
     $(".shenForm").insertAfter(".header-filter");
     $(".shenForm").css("display", "contents");
     $(".shenForm button").css("display", "none");
@@ -19,6 +19,9 @@ function injectForm() {
     $(".header-filter a").attr('tabindex', -1);
     $(".header-filter button").attr('tabindex', -1);
     $(".header-filter #columnSelection").attr('tabindex', -1);
+    	$("input[ng-model='filterProduct']").focus(function() {
+	   $(this).select();
+	});
 }
 
 $(document).ready(function() {
