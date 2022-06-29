@@ -6,6 +6,22 @@ function copyToClipBoard(text) {
     $temp.remove();
 }
 
+function customizeFocus() {
+	//### PAGE : product ####
+	// disable tab focus
+    $(".header-filter a").attr('tabindex', -1);
+    $(".header-filter button").attr('tabindex', -1);
+    $(".header-filter #columnSelection").attr('tabindex', -1);
+    
+    // select input content when focus Search
+    $("input[ng-model='filterProduct']").focus(function() {
+	   $(this).select();
+	});
+
+    //### PAGE : PurchaseOrder (Nhap Hang) ####
+    $(".k-grid-content a").attr('tabindex', -1);
+}
+
 function injectForm() {
     $(".input-group-append .dropdown-content").addClass("shenForm");
     $(".shenForm").insertAfter(".header-filter");
@@ -15,13 +31,7 @@ function injectForm() {
     // show input masp
     $(".shenForm div:first-child").removeClass("ng-hide");
 
-    // disable tab focus
-    $(".header-filter a").attr('tabindex', -1);
-    $(".header-filter button").attr('tabindex', -1);
-    $(".header-filter #columnSelection").attr('tabindex', -1);
-    	$("input[ng-model='filterProduct']").focus(function() {
-	   $(this).select();
-	});
+    customizeFocus();
 }
 
 $(document).ready(function() {
@@ -36,7 +46,7 @@ $(document).ready(function() {
         container.css("text-align", "center");
         container.css("text-align", "center");
         container.css("display", "block");
-        container.css("z-index", "1000");
+        container.css("z-index", "20000");
         container.prependTo($("body"));
 
         var btn = $('<input id="btn_copy_name" type="button" value="Copy tên" />');
@@ -74,13 +84,12 @@ $(document).ready(function() {
             copyToClipBoard(text);
         });
 
-        // copy MaSP khi click SP
-        $('body').on('click', 'tr.k-master-row', function() {
-            $(this).find(".cell-code.tdCodeDoctor").each(function() {
-                copyToClipBoard($(this).text());
-                console.log("copied the value: " + $(this).text());
-            });
-        })
+        btn = $('<input id="btn_dfocus" type="button" value="Disable focus" />');
+        btn.appendTo(container);
+        btn.click(function(e) {
+            customizeFocus();
+        });
+
     }, 3000);
 });
 
