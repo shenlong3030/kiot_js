@@ -75,10 +75,16 @@ $(document).ready(function() {
         btn.appendTo(container);
         btn.click(function(e) {
             var text = "";
-            $("table").find("td.cell-code").each(function() {
+            $(".k-window-poup table").find("td.cell-code").each(function() {
                 var masp = $(this).text();
+                if(!masp) {
+                	return true;
+                }
                 var tensp = $(this).next().text();
-                text = text + tensp + " " + masp + "\n";
+
+                var trNode = $(this).closest( "tr" )
+                var sl = trNode.find("input").first().val();
+                text = text + tensp + " " + masp + "\t" + sl + "\n";
             });
             console.log("copy text : " + text);
             copyToClipBoard(text);
