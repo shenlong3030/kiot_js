@@ -7,16 +7,16 @@ function copyToClipBoard(text) {
 }
 
 function customizeFocus() {
-	//### PAGE : product ####
-	// disable tab focus
+    //### PAGE : product ####
+    // disable tab focus
     $(".header-filter a").attr('tabindex', -1);
     $(".header-filter button").attr('tabindex', -1);
     $(".header-filter #columnSelection").attr('tabindex', -1);
     
     // select input content when focus Search
     $("input[ng-model='filterProduct']").focus(function() {
-	   $(this).select();
-	});
+       $(this).select();
+    });
 
     //### PAGE : PurchaseOrder (Nhap Hang) ####
     $(".k-grid-content a").attr('tabindex', -1);
@@ -78,13 +78,13 @@ $(document).ready(function() {
             $(".k-window-poup table").find("td.cell-code").each(function() {
                 var masp = $(this).text();
                 if(!masp) {
-                	return true;
+                    return true;
                 }
                 var tensp = $(this).next().text();
 
                 var trNode = $(this).closest( "tr" )
                 var sl = trNode.find("input").first().val();
-                text = text + tensp + " " + masp + "\t" + sl + "\n";
+                text = text + masp + "__" + tensp + "\t" + sl + "\n";
             });
             console.log("copy text : " + text);
             copyToClipBoard(text);
