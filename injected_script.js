@@ -80,9 +80,11 @@ $(document).ready(function() {
                 if(!masp) {
                     return true;
                 }
-                var tensp = $(this).next().text();
 
                 var trNode = $(this).closest( "tr" )
+                var tensp = trNode.find(".cell-auto").first().text();
+                tensp = tensp.replace("CL ", "");
+
                 var sl = trNode.find("input").first().val();
                 text = text + masp + "__" + tensp + "\t" + sl + "\n";
             });
