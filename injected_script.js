@@ -53,13 +53,24 @@ $(document).ready(function() {
         btn.appendTo(container);
         btn.click(function(e) {
             var text = "";
-            $("table").find("td.cell-auto.ng-binding").each(function() {
+            $("table tr>td.cell-auto.ng-binding:not(:first)").each(function() {
                 text = text + $(this).text() + "\n";
             });
             console.log("copy text : " + text);
             copyToClipBoard(text);
         });
-
+    
+        btn = $('<input id="btn_copy_sl" type="button" value="Copy SL" />');
+        btn.appendTo(container);
+        btn.click(function(e) {
+            var text = "";
+            $("table tr>td:nth-child(14):not(:first)").each(function() {
+                text = text + $(this).text() + "\n";
+            });
+            console.log("copy text : " + text);
+            copyToClipBoard(text);
+        });
+        
         btn = $('<input id="btn_copy_id" type="button" value="Copy mã" />');
         btn.appendTo(container);
         btn.click(function(e) {
@@ -90,12 +101,6 @@ $(document).ready(function() {
             });
             console.log("copy text : " + text);
             copyToClipBoard(text);
-        });
-
-        btn = $('<input id="btn_dfocus" type="button" value="Disable focus" />');
-        btn.appendTo(container);
-        btn.click(function(e) {
-            customizeFocus();
         });
 
     }, 3000);
