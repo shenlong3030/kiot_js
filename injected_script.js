@@ -87,20 +87,41 @@ $(document).ready(function() {
         btn.click(function(e) {
             var text = "";
             $(".k-window-poup table").find("td.cell-code").each(function() {
-                var masp = $(this).text();
+                var masp = $(this).text().trim();
                 if(!masp) {
                     return true;
                 }
 
                 var trNode = $(this).closest( "tr" )
-                var tensp = trNode.find(".cell-auto").first().text();
+                var tensp = trNode.find(".cell-auto").first().text().trim();
                 tensp = tensp.replace("CL ", "");
 
                 var sl = trNode.find("input").first().val();
                 text = text + masp + "__" + tensp + "\t" + sl + "\n";
             });
-            console.log("copy text : " + text);
-            copyToClipBoard(text);
+            if(text) {
+            	console.log("copy text : " + text);
+            	copyToClipBoard(text);
+            } else {
+            	$(".k-grid-content table").find("td.cell-code.tdCodeDoctor").each(function() {
+	                var masp = $(this).text().trim();
+	                if(!masp) {
+	                    return true;
+	                }
+
+	                var trNode = $(this).closest( "tr" )
+	                var tensp = trNode.find(".cell-auto.ng-binding").first().text().trim();
+	                tensp = tensp.replace("CL ", "");
+
+	                var sl = trNode.find("td:nth-child(14)").text().trim();
+	                text = text + masp + "__" + tensp + "\t" + sl + "\n";
+	            });
+	            if(text) {
+	            	console.log("copy text : " + text);
+	            	copyToClipBoard(text);
+	            }
+            }
+
         });
 
     }, 3000);
